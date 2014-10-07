@@ -20,6 +20,7 @@ class App
 		@notebook = builder.get_object('notebook2')
 	end
 	attr_reader :source_view
+	attr_reader :notebook
 end
 # --------
 Gtk.init
