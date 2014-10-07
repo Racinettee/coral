@@ -5,7 +5,7 @@ My attempt at creating a code editor. I would like this code editor to be fully 
 
 Development Dependancies
 ========================
-gnome-devel (libgtk3-dev, gdk, pango etc)
+gnome-devel (libgtk3-dev, gdk, pango etc)<br>
 Ruby Gems<br>
 gtk3<br>
 gtksourceview3<br>
