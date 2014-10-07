@@ -7,7 +7,7 @@ Development Dependancies
 ========================
 gnome-devel (libgtk3-dev, gdk, pango etc)
 
-Ruby Gems:
+Ruby Gems required
 gtk3 and gtksourceview3
 -----------------
 The accompanying gems will download and install alongside.
