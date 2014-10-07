@@ -1,10 +1,17 @@
+require './scrolledsrcview'
 module Callbacks
 def on_main_window_destroy
 	Gtk.main_quit
 end
+# [------------------------------------]
+# [ Add a new tab to the notebook view ]
+# [ ---------------------------------- ]
 def on_menu_file_new_tab_activate
 	label = Gtk::Label.new 'Hello'
-	@notebook.append_page(GtkSource::View.new, label)
+	new_view = new_scrolled_sourceview()
+	@notebook.append_page(new_view, label)
+	new_view.show
+	#GtkSource::View.new, label)
 end
 def on_edit_choose_font_activate
 	font_choose_dialog = Gtk::FontChooserDialog.new :title => 'Select Font'
