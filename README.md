@@ -6,11 +6,8 @@ My attempt at creating a code editor. I would like this code editor to be fully 
 Development Dependancies
 ========================
 gnome-devel (libgtk3-dev, gdk, pango etc)
-
-Ruby Gems
-
-gtk3
-
-gtksourceview3
+Ruby Gems<br>
+gtk3<br>
+gtksourceview3<br>
 
 The accompanying gems will download and install alongside.
