@@ -25,12 +25,7 @@ class App
 		screen = default_display.default_screen
 		# ------------------------------------
 		screen.add_provider(@css_provider, 800)
-		#@style_context = @window.style_context
-		#@style_context.add_provider(@css_provider, 800)
-		#@style_context = Gtk::StyleContext.new
-		#default_screen = Gdk::Screen.default
-		#@style_context.set_screen default_screen
-		#@style_context.add_provider(@css_provider, 800)
+		# ---------------------------
 		@window.show_all
 	end
 end
