@@ -7,6 +7,7 @@ Development Dependancies
 ========================
 gnome-devel (libgtk3-dev, gdk, pango etc)<br>
 Ruby Gems<br>
+git<br>
 gtk3<br>
 gtksourceview3<br>
 
