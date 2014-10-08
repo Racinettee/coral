@@ -10,4 +10,3 @@ def new_scrolled_sourceview
 	new_srcview.show
 	return scrolled_window	
 end
-		
