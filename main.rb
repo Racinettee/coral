@@ -2,22 +2,21 @@
 require 'gtk3'
 require 'gdk3'
 require 'gtksourceview3'
-require 'pango'
-require './callbacks.rb'
+require './App/callbacks.rb'
+require './App/initialize.rb'
 # --------------
 class App
 	include Callbacks
+	include Initialization
+	# ---------------
 	def initialize
-		builder = Gtk::Builder.new
-		builder.add_from_file('./testbuilder2.glade')
-		builder.connect_signals {|handle| method(handle)}
-		@language_man = GtkSource::LanguageManager.new
-		@language = @language_man.get_language("ruby")
-		source_buffer = GtkSource::Buffer.new(@language)
-		@window = builder.get_object("applicationwindow1")
-		@source_view = builder.get_object("gtksourceview1")
-		@source_view.set_buffer source_buffer
-		@notebook = builder.get_object('notebook2')
+		# ---------------------------------------------------------------
+		# @window, @notebook and @source_view are exposed by this method
+		# --------------------------------------------------------------
+		build_win
+		# -----------
+		init_language
+		# -----------
 		@css_provider = Gtk::CssProvider.new
 		@css_provider.load(:data => File.read("style.css"))
 		# ----------------------------------------
