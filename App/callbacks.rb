@@ -1,4 +1,4 @@
-require './scrolledsrcview'
+require './App/scrolledsrcview.rb'
 module Callbacks
 # ------------------------------------------------
 # Quit the app if the user closes the main window
@@ -21,6 +21,35 @@ def on_menu_file_new_tab_activate
 	new_view.show_all
 	#@notebook.set_current_page -1
 end
+# ---------------------------
+# File open, save and save as
+# ---------------------------
+def on_menu_open_file_activate
+	# ---------------------------------
+	# Initialize a file chooser dialogue
+	# ------------------------------------
+	file_dialog = Gtk::FileChooserDialog.new :title=>'Open File',
+		:action=>Gtk::FileChooser::Action::OPEN, :parent=>@window,
+		:buttons=>[['Open', Gtk::ResponseType::OK], ['Cancel', Gtk::ResponseType::CANCEL]]
+	# ----------------------------------------------------------
+	# This should set the dialog to teh current working folder
+	# ------------------------------
+	file_dialog.current_folder = '.'
+	# Run the dialog
+	response = file_dialog.run
+	# If the user selected a filename and chose open then we can open the file
+	if response == Gtk::ResponseType::OK
+		filename = file_dialog.filename
+		source_file = GtkSource::File.new
+	end
+	# -----------------
+	file_dialog.destroy
+end
+def on_menu_file_save_activate
+end
+def on_menu_file_saveas_activate
+end
+# -----------------------------
 def on_edit_choose_font_activate
 	# -------------------------------
 	# Initialize a font chooser dialogue

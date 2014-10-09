@@ -52,6 +52,25 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Open File</property>
                         <property name="use_underline">True</property>
+                        <signal name="activate" handler="on_menu_open_file_activate" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkMenuItem" id="menu_file_save">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Save</property>
+                        <property name="use_underline">True</property>
+                        <signal name="activate" handler="on_menu_file_save_activate" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkMenuItem" id="menu_file_saveas">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Save As</property>
+                        <property name="use_underline">True</property>
+                        <signal name="activate" handler="on_menu_file_saveas_activate" swapped="no"/>
                       </object>
                     </child>
                     <child>
