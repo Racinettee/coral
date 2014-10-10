@@ -16,9 +16,9 @@ module Initialization
 	end
 	def init_language
 		@language_man = GtkSource::LanguageManager.new
-		@language = @language_man.get_language("ruby")
+		language = @language_man.get_language("ruby")
 		# ---------------------------------------------
-		source_buffer = GtkSource::Buffer.new(@language)
+		source_buffer = GtkSource::Buffer.new(language)
 		@source_view.set_buffer source_buffer
 	end
 end

@@ -40,13 +40,24 @@ def on_menu_open_file_activate
 	# If the user selected a filename and chose open then we can open the file
 	if response == Gtk::ResponseType::OK
 		filename = file_dialog.filename
-		#source_file = GtkSource::File.new
-		#source_buffer.location = filename
-		#buffer = GtkSource::Buffer.new
-		#source_loader = GtkSource::FileLoader.new(buffer, source_file)
+		# --------------------------------
+		new_view = new_scrolled_sourceview
+		# --------------------------------
+		children = new_view.children[0]
+		# --------------------------
+		buff = children.buffer # i hope this is the source_view
+		# ------------------------
+		buff.text = File.read(filename)
+		# --------------------------------
+		label = Gtk::Label.new filename[filename.rindex('/')+1..-1]
+		@notebook.append_page(new_view, label)
+		
+		new_view.show_all
+		# -----------------
 	end
 	# -----------------
 	file_dialog.destroy
+	@notebook.change_current_page -1
 end
 def on_menu_file_save_activate
 end
