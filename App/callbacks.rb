@@ -40,7 +40,10 @@ def on_menu_open_file_activate
 	# If the user selected a filename and chose open then we can open the file
 	if response == Gtk::ResponseType::OK
 		filename = file_dialog.filename
-		source_file = GtkSource::File.new
+		#source_file = GtkSource::File.new
+		#source_buffer.location = filename
+		#buffer = GtkSource::Buffer.new
+		#source_loader = GtkSource::FileLoader.new(buffer, source_file)
 	end
 	# -----------------
 	file_dialog.destroy
