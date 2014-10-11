@@ -1,4 +1,5 @@
 #!/usr/bin/ruby
+require 'rubygems'
 require 'gtk3'
 require 'gdk3'
 require 'gtksourceview3'
