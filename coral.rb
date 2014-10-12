@@ -29,6 +29,7 @@ class App
 	end
 end
 # --------
+binding.pry
 Gtk.init
 app = App.new
 Gtk.main
