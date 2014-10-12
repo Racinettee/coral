@@ -1,5 +1,4 @@
 #!/usr/bin/ruby
-require 'rubygems'
 require 'gtk3'
 require 'gdk3'
 require 'gtksourceview3'
@@ -30,6 +29,7 @@ class App
 	end
 end
 # --------
+binding.pry
 Gtk.init
 app = App.new
 Gtk.main
