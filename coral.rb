@@ -14,16 +14,14 @@ class App
 		# @window, @notebook and @source_view are exposed by this method
 		# --------------------------------------------------------------
 		build_win
-		# -----------
+		# ------------------------------------------
+		# adds @language_man(ager) to this instance
+		# ------------------------------------------
 		init_language
-		# -----------
-		@css_provider = Gtk::CssProvider.new
-		@css_provider.load(:data => File.read("style.css"))
-		# ----------------------------------------
-		default_display = Gdk::Display.default
-		screen = default_display.default_screen
-		# ------------------------------------
-		screen.add_provider(@css_provider, 800)
+		# ------------------
+		# adds @css_provider
+		# ------------------
+		apply_style
 		# ---------------------------
 		@window.show_all
 	end

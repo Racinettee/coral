@@ -51,7 +51,7 @@ def on_menu_open_file_activate
 		# --------------------------------
 		label = Gtk::Label.new filename[filename.rindex('/')+1..-1]
 		@notebook.append_page(new_view, label)
-		
+		# -----------------
 		new_view.show_all
 		# -----------------
 	end
@@ -60,8 +60,27 @@ def on_menu_open_file_activate
 	@notebook.change_current_page -1
 end
 def on_menu_file_save_activate
+	
 end
 def on_menu_file_saveas_activate
+	file_dialog = Gtk::FileChooserDialog.new :title=>'Open File',
+		:action=>Gtk::FileChooser::Action::SAVE, :parent=>@window,
+		:buttons=>[['Save', Gtk::ResponseType::OK], ['Cancel', Gtk::ResponseType::CANCEL]]
+	# -----------------------------
+	file_dialog.current_folder = '.'
+	
+	if file_dialog.run == Gtk::ResponseType::OK
+		# ------------------------------
+		filename = file_dialog.filename
+		# ------------------------------
+		# Open the new file for writing
+		file = File.open(filename, 'w')
+		# -------------------------
+		src_view = @notebook.nth_page(@notebook.current_page)
+		# ---------------------------
+		file.close
+	end
+	file_dialog.destroy
 end
 # -----------------------------
 def on_edit_choose_font_activate

@@ -21,4 +21,13 @@ module Initialization
 		source_buffer = GtkSource::Buffer.new(language)
 		@source_view.set_buffer source_buffer
 	end
+	def apply_style
+		@css_provider = Gtk::CssProvider.new
+		@css_provider.load(:data => File.read("style.css"))
+		# ----------------------------------------
+		default_display = Gdk::Display.default
+		screen = default_display.default_screen
+		# ------------------------------------
+		screen.add_provider(@css_provider, 800)
+	end
 end
