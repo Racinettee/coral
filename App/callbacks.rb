@@ -75,8 +75,12 @@ def on_menu_file_saveas_activate
 		# ------------------------------
 		# Open the new file for writing
 		file = File.open(filename, 'w')
-		# -------------------------
-		src_view = @notebook.nth_page(@notebook.current_page)
+		# -------------------------						# scrolled window: sourceview
+		src_view = @notebook.get_nth_page(@notebook.page).children[0]
+		# ----------------------------
+		buff = src_view.buffer
+		# --------------------
+		file.write(buff.text)
 		# ---------------------------
 		file.close
 	end
