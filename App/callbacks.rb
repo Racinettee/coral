@@ -4,22 +4,23 @@ module Callbacks
 # Quit the app if the user closes the main window
 # ------------------------------------------------
 def on_main_window_destroy
+	# -----------------------------------------------------
+	# Add code here to warn user if there are unsaved files
+	# --------------
 	Gtk.main_quit
 end
 # [------------------------------------]
 # [ Add a new tab to the notebook view ]
 # [ ---------------------------------- ]
 def on_menu_file_new_tab_activate
-	# -----------------------------
-	label = Gtk::Label.new 'Hello'
-	new_view = new_scrolled_sourceview()
-	@notebook.append_page(new_view, label)
-	# ----------------------------------------------------------------
-	# Make sure the scrolled window part of the heirarchy is visible
-	# when the user goes to view the new tab
+	# ------------------------------------
+	new_view = ScrolledSrcV.new(@notebook)
+	@notebook.append_page(new_view, new_view.label)
+	# The new window needs to be visible. Its
+	# constructor takes care of that
 	# ---------------------------------------
-	new_view.show_all
-	#@notebook.set_current_page -1
+	# switch to the newest open page
+	@notebook.change_current_page -1
 end
 # ---------------------------
 # File open, save and save as
@@ -41,7 +42,8 @@ def on_menu_open_file_activate
 	if response == Gtk::ResponseType::OK
 		filename = file_dialog.filename
 		# --------------------------------
-		new_view = new_scrolled_sourceview
+		new_view = ScrolledSrcV.new(@notebook)
+		#new_scrolled_sourceview
 		# --------------------------------
 		children = new_view.children[0]
 		# --------------------------
