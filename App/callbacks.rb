@@ -43,29 +43,39 @@ def on_menu_open_file_activate
 		filename = file_dialog.filename
 		# --------------------------------
 		new_view = ScrolledSrcV.new(@notebook)
-		#new_scrolled_sourceview
 		# --------------------------------
-		children = new_view.children[0]
-		# --------------------------
-		buff = children.buffer # i hope this is the source_view
+		buff = new_view.source_view.buffer
 		# ------------------------
 		buff.text = File.read(filename)
 		# --------------------------------
 		label = Gtk::Label.new filename[filename.rindex('/')+1..-1]
+		# ------------------------------------
 		@notebook.append_page(new_view, label)
-		# -----------------
-		new_view.show_all
-		# -----------------
 	end
 	# -----------------
 	file_dialog.destroy
 	@notebook.change_current_page -1
 end
 def on_menu_file_save_activate
-	
+	# --------------------------
+	scrld_src = @notebook.get_nth_page @notebook.page
+	puts scrld_src
+	# --------------------------------------------------
+	# if this current document has never been saved before
+	# then utilize the save as call back
+	# --------------------------------------------------
+	if scrld_src.label.text == '*new*'
+		on_menu_file_saveas_activate
+	else
+		filename = scrld_src.filepath
+		file = File.open(filename, 'w')
+		# -----------------------------
+		file.write(scrld_src.source_view.buffer.text)
+		file.close
+	end
 end
 def on_menu_file_saveas_activate
-	file_dialog = Gtk::FileChooserDialog.new :title=>'Open File',
+	file_dialog = Gtk::FileChooserDialog.new :title=>'Save As',
 		:action=>Gtk::FileChooser::Action::SAVE, :parent=>@window,
 		:buttons=>[['Save', Gtk::ResponseType::OK], ['Cancel', Gtk::ResponseType::CANCEL]]
 	# -----------------------------
