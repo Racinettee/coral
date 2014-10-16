@@ -51,6 +51,8 @@ def on_menu_open_file_activate
 		label = Gtk::Label.new filename[filename.rindex('/')+1..-1]
 		# ------------------------------------
 		@notebook.append_page(new_view, label)
+		# ------------------------
+		new_view.filepath = filename
 	end
 	# -----------------
 	file_dialog.destroy
@@ -59,16 +61,14 @@ end
 def on_menu_file_save_activate
 	# --------------------------
 	scrld_src = @notebook.get_nth_page @notebook.page
-	puts scrld_src
 	# --------------------------------------------------
 	# if this current document has never been saved before
 	# then utilize the save as call back
 	# --------------------------------------------------
-	if scrld_src.label.text == '*new*'
+	if scrld_src.filepath == ''
 		on_menu_file_saveas_activate
 	else
-		filename = scrld_src.filepath
-		file = File.open(filename, 'w')
+		file = File.open(scrld_src.filepath, 'w')
 		# -----------------------------
 		file.write(scrld_src.source_view.buffer.text)
 		file.close
@@ -77,7 +77,8 @@ end
 def on_menu_file_saveas_activate
 	file_dialog = Gtk::FileChooserDialog.new :title=>'Save As',
 		:action=>Gtk::FileChooser::Action::SAVE, :parent=>@window,
-		:buttons=>[['Save', Gtk::ResponseType::OK], ['Cancel', Gtk::ResponseType::CANCEL]]
+		:buttons=>[['Save', Gtk::ResponseType::OK],
+		['Cancel', Gtk::ResponseType::CANCEL]]
 	# -----------------------------
 	file_dialog.current_folder = '.'
 	
@@ -86,15 +87,21 @@ def on_menu_file_saveas_activate
 		filename = file_dialog.filename
 		# ------------------------------
 		# Open the new file for writing
-		file = File.open(filename, 'w')
 		# -------------------------						# scrolled window: sourceview
-		src_view = @notebook.get_nth_page(@notebook.page).children[0]
+		scrldsrc = @notebook.get_nth_page(@notebook.page)
+		
+		lbl = filename[filename.rindex('/')+1..-1]
+		
+		scrldsrc.label.text = lbl
 		# ----------------------------
-		buff = src_view.buffer
-		# --------------------
-		file.write(buff.text)
-		# ---------------------------
-		file.close
+		File.open(filename, 'w') do |f|
+			f.write(scrldsrc.source_view.buffer.text)
+			# --------------
+			f.close
+		end
+		# ------------------
+		scrldsrc.saved = true
+		scrldsrc.filepath = filename
 	end
 	file_dialog.destroy
 end

@@ -17,8 +17,8 @@ class ScrolledSrcV < Gtk::ScrolledWindow
 		show
 	end
 	attr :source_view
-	attr :saved
-	attr :filepath
+	attr_accessor :saved
+	attr_accessor :filepath
 	attr :parent
-	attr :label
+	attr_accessor :label
 end

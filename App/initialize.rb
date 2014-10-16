@@ -3,7 +3,7 @@ module Initialization
 	def build_win
 	# -----------
 		builder = Gtk::Builder.new
-		builder.add_from_file('./testbuilder2.glade')
+		builder.add_from_file('./testbuilder3.glade')
 		builder.connect_signals {|handle| method(handle)}
 		# ---------------------------------------------------------
 		# Get instance properties while the builder is still around
