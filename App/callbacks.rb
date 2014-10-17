@@ -20,7 +20,7 @@ def on_menu_file_new_tab_activate
 	# constructor takes care of that
 	# ---------------------------------------
 	# switch to the newest open page
-	@notebook.change_current_page -1
+	@notebook.page = -1
 end
 # ---------------------------
 # File open, save and save as
@@ -53,10 +53,13 @@ def on_menu_open_file_activate
 		@notebook.append_page(new_view, label)
 		# ------------------------
 		new_view.filepath = filename
+		
+		lang = @lang_manager.guess_language(filename,'')
+		buff.language=lang
 	end
 	# -----------------
 	file_dialog.destroy
-	@notebook.change_current_page -1
+	@notebook.page = -1
 end
 def on_menu_file_save_activate
 	# --------------------------

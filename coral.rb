@@ -6,18 +6,14 @@ require './App/callbacks.rb'
 require './App/initialize.rb'
 # --------------
 class App
-	include Callbacks
 	include Initialization
+	include Callbacks
 	# ---------------
 	def initialize
 		# ---------------------------------------------------------------
 		# @window, @notebook and @source_view are exposed by this method
 		# --------------------------------------------------------------
 		build_win
-		# ------------------------------------------
-		# adds @language_man(ager) to this instance
-		# ------------------------------------------
-		init_language
 		# ------------------
 		# adds @css_provider
 		# ------------------
