@@ -105,6 +105,8 @@ def on_menu_file_saveas_activate
 		# ------------------
 		scrldsrc.saved = true
 		scrldsrc.filepath = filename
+		lang = @lang_manager.guess_language(filename,'')
+		scrldsrc.source_view.buffer.language=lang
 	end
 	file_dialog.destroy
 end
