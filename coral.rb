@@ -1,6 +1,4 @@
 #!/usr/bin/ruby
-require 'gtk3'
-require 'gdk3'
 require 'gtksourceview3'
 require './App/callbacks.rb'
 require './App/initialize.rb'

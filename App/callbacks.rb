@@ -56,6 +56,8 @@ def on_menu_open_file_activate
 		
 		lang = @lang_manager.guess_language(filename,'')
 		buff.language=lang
+	else
+		puts 'Failed to open #{filename}'
 	end
 	# -----------------
 	file_dialog.destroy
@@ -128,5 +130,20 @@ def on_edit_choose_font_activate
 	end
 	# Destroy the dialogue
 	font_choose_dialog.destroy
+end
+# -------------------------------
+def on_view_activate
+	source_view = @notebook.get_nth_page(@notebook.page).source_view
+	# -----------------------------------------------
+	
+end
+def on_menu_show_lineno_toggled
+	source_view = @notebook.get_nth_page(@notebook.page).source_view
+	# -------------------------------
+	if source_view.show_line_numbers? 
+		source_view.show_line_numbers=false
+	else
+		source_view.show_line_numbers=true
+	end
 end
 end

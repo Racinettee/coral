@@ -12,6 +12,9 @@ module Initialization
 		@notebook = builder.get_object('notebook2')
 		# ---------------------
 		@lang_manager = GtkSource::LanguageManager.new
+		# -----------------------
+		@view_menu = builder.get_object('view_menu')
+		@main_menu = builder.get_object('main_menu')
 	end
 	def apply_style
 		@css_provider = Gtk::CssProvider.new

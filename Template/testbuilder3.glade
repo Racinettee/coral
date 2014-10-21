@@ -2,7 +2,6 @@
 <!-- Generated with glade 3.16.1 -->
 <interface>
   <requires lib="gtk+" version="3.10"/>
-  <requires lib="gtksourceview" version="3.0"/>
   <object class="GtkApplicationWindow" id="applicationwindow1">
     <property name="name">window</property>
     <property name="can_focus">False</property>
@@ -17,7 +16,7 @@
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkMenuBar" id="menubar1">
+          <object class="GtkMenuBar" id="main_menu">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
@@ -121,6 +120,22 @@
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_View</property>
                 <property name="use_underline">True</property>
+                <signal name="activate" handler="on_view_activate" swapped="no"/>
+                <child type="submenu">
+                  <object class="GtkMenu" id="view_menu">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkCheckMenuItem" id="menu_show_lineno">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Line Numbers</property>
+                        <property name="use_underline">True</property>
+                        <signal name="toggled" handler="on_menu_show_lineno_toggled" swapped="no"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
             <child>
