@@ -38,29 +38,32 @@ def on_menu_open_file_activate
 	file_dialog.current_folder = '.'
 	# Run the dialog
 	response = file_dialog.run
-	# If the user selected a filename and chose open then we can open the file
-	if response == Gtk::ResponseType::OK
-		filename = file_dialog.filename
-		# --------------------------------
-		new_view = ScrolledSrcV.new(@notebook)
-		# --------------------------------
-		buff = new_view.source_view.buffer
-		# ------------------------
-		buff.text = File.read(filename)
-		# --------------------------------
-		label = Gtk::Label.new filename[filename.rindex('/')+1..-1]
-		# ------------------------------------
-		@notebook.append_page(new_view, label)
-		# ------------------------
-		new_view.filepath = filename
-		
-		lang = @lang_manager.guess_language(filename,'')
-		buff.language=lang
-	else
-		puts 'Failed to open #{filename}'
+	
+	if response != Gtk::ResponseType::OK
+		puts 'Failed to open #{file_dialog.filename}'
+		file_dialog.destroy
+		return
 	end
-	# -----------------
+	# If the user selected a filename and chose open then we can open the file
+	filename = file_dialog.filename
 	file_dialog.destroy
+	# --------------------------------
+	new_view = ScrolledSrcV.new(@notebook)
+	# --------------------------------
+	buff = new_view.source_view.buffer
+	# ------------------------
+	buff.text = File.read(filename)
+	# --------------------------------
+	label = Gtk::Label.new(filename[filename.rindex('/')+1..-1])
+	# ------------------------------------
+	@notebook.append_page(new_view, label)
+	# ------------------------
+	new_view.filepath = filename
+	
+	lang = @lang_manager.guess_language(filename,'')
+	buff.language=lang
+
+	# -----------------
 	@notebook.page = -1
 end
 def on_menu_file_save_activate
@@ -133,11 +136,13 @@ def on_edit_choose_font_activate
 end
 # -------------------------------
 def on_view_activate
-	source_view = @notebook.get_nth_page(@notebook.page).source_view
-	# -----------------------------------------------
-	
+	if @notebook.n_pages > 0	
+		source_view = @notebook.get_nth_page(@notebook.page).source_view
+		# -----------------------------------------------
+	end
 end
 def on_menu_show_lineno_toggled
+	return if @notebook.n_pages == 0
 	source_view = @notebook.get_nth_page(@notebook.page).source_view
 	# -------------------------------
 	if source_view.show_line_numbers? 

@@ -13,11 +13,11 @@ class ScrolledSrcV < Gtk::ScrolledWindow
 		# -----
 		@source_view = GtkSource::View.new
 		add(@source_view)
-		@source_view.signal_connect('key_press_event')do
-			puts 'key pressed'
+		#@source_view.signal_connect('key_press_event')do
+		#	puts 'key pressed'
 			# this works but suggestions need to be added
 			#@source_view.completion.show
-		end
+		#end
 		 
 		show_all
 		show
